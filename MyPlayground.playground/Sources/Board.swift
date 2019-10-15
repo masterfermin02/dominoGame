@@ -18,10 +18,6 @@ public class Board {
         boardHistory.insert(domino, at: 0)
     }
     
-    public func addPlay(player: Player){
-        
-    }
-    
     public func getHead() -> Domino? {
         return boardHistory.first
     }
@@ -32,9 +28,7 @@ public class Board {
     
     public func print()
     {
-        for domino in boardHistory {
-            Swift.print(domino)
-        }
+        Swift.print(boardHistory)
     }
     
     public init() {

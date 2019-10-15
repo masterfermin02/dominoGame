@@ -27,7 +27,7 @@ public class Domino {
     }
     
     public func switchSuit() {
-        var temp = firstSuite
+        let temp = firstSuite
         firstSuite = secondSuite
         secondSuite = temp
     }

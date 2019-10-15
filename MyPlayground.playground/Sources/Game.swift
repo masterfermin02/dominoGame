@@ -11,8 +11,8 @@ public class Game {
     let board: Board
     
     public func run() {
-        while notGameOver() {
-            while notRoundOver() {
+        while !gameOver() {
+            while !roundOver() {
                 nextTurn()
                 addPlay()
                 printBoard()
@@ -21,12 +21,12 @@ public class Game {
         }
     }
     
-    public func notRoundOver() -> Bool {
-        return turn.dominoesIsNotEmpty() || isNotBlock()
+    public func roundOver() -> Bool {
+        return turn.dominoesIsEmpty() || isBlock()
     }
     
-    public func notGameOver() -> Bool {
-        return true
+    public func gameOver() -> Bool {
+        return false
     }
     
     public func nextTurn() {
@@ -47,10 +47,6 @@ public class Game {
     
     public func getTurn () -> Player {
         return self.turn
-    }
-    
-    public func isNotBlock() -> Bool {
-        return !isBlock()
     }
     
     public func isBlock() -> Bool {

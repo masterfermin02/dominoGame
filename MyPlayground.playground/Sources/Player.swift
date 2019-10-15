@@ -63,8 +63,8 @@ public class Player {
         return nil
     }
     
-    public func dominoesIsNotEmpty() -> Bool {
-        return !dominoes.isEmpty
+    public func dominoesIsEmpty() -> Bool {
+        return dominoes.isEmpty
     }
     
     public func addPlay(board: Board) {
