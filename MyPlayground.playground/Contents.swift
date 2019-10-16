@@ -9,5 +9,5 @@ delear.deal()
 /*for player in players {
     print("Rank: \(player.rank)")
 }*/
-//let game = Game(players: players)
-//game.run()
+let game = Game(players: players)
+game.run()

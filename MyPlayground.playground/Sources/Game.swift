@@ -22,13 +22,18 @@ public class Game {
                 printBoard()
                 sleep(1)
             }
-            updateScore()
+            updateScore(winnerIndex: getRounWinner())
+            printRound()
         }
         printWinner()
     }
     
-    public func updateScore() {
-        
+    public func updateScore(winnerIndex: Int) {
+        if isEven(winnerIndex: winnerIndex) {
+            score[pairOne] = score[pairOne] + players[0].rank + players[2].rank
+        } else {
+            score[PairTwo] = score[PairTwo] + players[1].rank + players[3].rank
+        }
     }
     
     public func getRounWinner() -> Int {
@@ -43,8 +48,12 @@ public class Game {
         return turnIndex
     }
     
-    public func turnEven() -> Bool {
-        return turnIndex % 2 == 0
+    public func isEven(winnerIndex: Int) -> Bool {
+        return winnerIndex % 2 == 0
+    }
+    
+    public func printRound() {
+        
     }
     
     public func printWinner() {
