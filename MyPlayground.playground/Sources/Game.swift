@@ -9,6 +9,10 @@ public class Game {
     var blocked = false
     var turnPass = 0
     let board: Board
+    var score = [0,0]
+    let pairOne = 0
+    let PairTwo = 1
+    let maximumScore = 200
     
     public func run() {
         while !gameOver() {
@@ -18,7 +22,12 @@ public class Game {
                 printBoard()
                 sleep(1)
             }
+            updateScore()
         }
+    }
+    
+    public func updateScore() {
+        
     }
     
     public func roundOver() -> Bool {
@@ -26,7 +35,7 @@ public class Game {
     }
     
     public func gameOver() -> Bool {
-        return false
+        return score[pairOne] >= maximumScore || score[PairTwo] >= maximumScore
     }
     
     public func nextTurn() {
@@ -36,7 +45,13 @@ public class Game {
     
     
     public func addPlay() {
-        turn.addPlay(board: board)
+        if !turn.addPlay(board: board) {
+            turnPass = turnPass + 1
+        } else {
+            if turnPass > 0 {
+                turnPass = 0
+            }
+        }
     }
     
     public func printBoard()
@@ -50,7 +65,7 @@ public class Game {
     }
     
     public func isBlock() -> Bool {
-        return blocked
+        return turnPass == players.count
     }
     
     public init(players: [Player]) {

@@ -1,23 +1,5 @@
 import Foundation
 
-public class Move {
-    private let index: Int?
-    private let headOrTail: Bool
-    
-    public func getIndex() -> Int? {
-        return index
-    }
-    
-    public func getHeadOrTail() -> Bool {
-        return headOrTail
-    }
-    
-    public init(index: Int?, headOrTail: Bool) {
-        self.index = index
-        self.headOrTail = headOrTail
-    }
-}
-
 public class Player {
     
     var dominoes: [Domino]
@@ -67,19 +49,19 @@ public class Player {
         return dominoes.isEmpty
     }
     
-    public func addPlay(board: Board) {
+    public func addPlay(board: Board) -> Bool {
         if let nextMove = getNextMove(board: board) {
-            if let index = nextMove.getIndex(){
+            if let index = nextMove.getIndex() {
                 let domino = dominoes.remove(at: index)
                 if nextMove.getHeadOrTail() {
                     board.prependHistory(domino: domino)
-                } else {
-                    board.appendHistory(domino: domino)
+                    return true
                 }
+                board.appendHistory(domino: domino)
+                return true
             }
-            
         }
-      
+        return false
     }
     
     public func getNextMove(board: Board) -> Move? {
@@ -95,9 +77,9 @@ public class Player {
         if headOption != nil && tailOption != nil {
             if Bool.random() {
                 return Move(index: headOption, headOrTail: true)
-            } else {
-                return Move(index: tailOption, headOrTail: false)
             }
+            
+            return Move(index: tailOption, headOrTail: false)
         }
         
         if headOption != nil {
