@@ -24,9 +24,30 @@ public class Game {
             }
             updateScore()
         }
+        printWinner()
     }
     
     public func updateScore() {
+        
+    }
+    
+    public func getRounWinner() -> Int {
+        if !isBlock() {
+            return turnIndex
+        }
+        
+        if players[turnIndex].rank < players[generateNextIndex()].rank  {
+            return turnIndex
+        }
+        nextTurn()
+        return turnIndex
+    }
+    
+    public func turnEven() -> Bool {
+        return turnIndex % 2 == 0
+    }
+    
+    public func printWinner() {
         
     }
     
@@ -39,8 +60,12 @@ public class Game {
     }
     
     public func nextTurn() {
-        turnIndex = (turnIndex + 1) % players.count
+        turnIndex = generateNextIndex()
         turn = players[turnIndex]
+    }
+    
+    public func generateNextIndex() -> Int {
+        return (turnIndex + 1) % players.count
     }
     
     

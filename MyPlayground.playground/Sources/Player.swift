@@ -7,6 +7,13 @@ public class Player {
     var name: String
     var six = 6
     
+    /// The sum of the two suited ends, also called weight.
+    public var rank: Int {
+        return dominoes.reduce(0, { score, domino in
+            score + domino.rank
+        })
+    }
+    
     public func appendDomino(domino: Domino) {
         dominoes.append(domino);
     }

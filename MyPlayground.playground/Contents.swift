@@ -7,7 +7,7 @@ let players = [Player(name: "Juancho"), Player(name: "Cindy"), Player(name: "Ern
 let delear = Delear(dominoSet: DominoSet.standardSet(highestSuit), players: players)
 delear.deal()
 /*for player in players {
-    player.print()
+    print("Rank: \(player.rank)")
 }*/
-let game = Game(players: players)
-game.run()
+//let game = Game(players: players)
+//game.run()

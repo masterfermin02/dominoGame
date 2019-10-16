@@ -6,6 +6,11 @@ public class Domino {
     var firstSuite: Int
     var secondSuite: Int
     
+    /// The sum of the two suited ends, also called weight.
+    public var rank: Int {
+        return firstSuite + secondSuite
+    }
+    
     public func toString() -> String {
         return "[\(firstSuite)|\(secondSuite)]"
     }
