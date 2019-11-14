@@ -8,7 +8,7 @@ public class Game {
     var players: [Player]
     var blocked = false
     var turnPass = 0
-    let board: Board
+    var board: Board
     var score = [0,0]
     let pairOne = 0
     let PairTwo = 1
@@ -19,11 +19,12 @@ public class Game {
             while !roundOver() {
                 nextTurn()
                 addPlay()
-                printBoard()
+                printPlay()
                 sleep(1)
             }
             updateScore(winnerIndex: getRounWinner())
             printRound()
+            resetRound()
         }
         printWinner()
     }
@@ -34,6 +35,13 @@ public class Game {
         } else {
             score[PairTwo] = score[PairTwo] + players[1].rank + players[3].rank
         }
+    }
+    
+    public func getScore(winnerIndex: Int) -> Int {
+        if isEven(winnerIndex: winnerIndex) {
+            return score[pairOne]
+        }
+        return score[PairTwo]
     }
     
     public func getRounWinner() -> Int {
@@ -53,11 +61,18 @@ public class Game {
     }
     
     public func printRound() {
+        let winnerIndex = getRounWinner()
+        let pairWinner = ((winnerIndex + 2) % players.count)
+        Swift.print("Round winners : \(turnIndex) - \(pairWinner)")
+        Swift.print("Score pair one : \(score[pairOne])")
+        Swift.print("Score pair two : \(score[PairTwo])")
         
     }
     
     public func printWinner() {
-        
+        let winnerIndex = getRounWinner()
+        let pairWinner = ((winnerIndex + 2) % players.count)
+        Swift.print("Winners : \(turnIndex) - \(pairWinner)")
     }
     
     public func roundOver() -> Bool {
@@ -88,8 +103,11 @@ public class Game {
         }
     }
     
-    public func printBoard()
+    public func printPlay()
     {
+        for player in players {
+            player.print()
+        }
         Swift.print("turn: \(turnIndex)")
         board.print()
     }
@@ -99,7 +117,17 @@ public class Game {
     }
     
     public func isBlock() -> Bool {
-        return turnPass == players.count
+        return turnPass >= players.count
+    }
+    
+    public func resetRound() {
+        turnPass = 0
+        board = Board()
+        let delear = Delear(dominoSet: DominoSet.standardSet(6), players: players)
+        delear.deal()
+        if let domino = turn.getFirst() {
+            board.appendHistory(domino: domino)
+        }
     }
     
     public init(players: [Player]) {

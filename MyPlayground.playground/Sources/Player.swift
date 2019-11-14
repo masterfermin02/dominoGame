@@ -52,6 +52,10 @@ public class Player {
         return nil
     }
     
+    public func getFirst() -> Domino? {
+        return dominoes.removeFirst()
+    }
+    
     public func dominoesIsEmpty() -> Bool {
         return dominoes.isEmpty
     }
